@@ -12,8 +12,6 @@ export default function AnalyzeForm({ onSubmit, isLoading }: Props) {
   const [store, setStore] = useState<StoreType>("google_play");
   const [country, setCountry] = useState("US");
   const [language, setLanguage] = useState("en_US");
-  const [appstorespyKey, setAppstorespyKey] = useState(() => sessionStorage.getItem("appstorespyKey") || "");
-  const [geminiKey, setGeminiKey] = useState(() => sessionStorage.getItem("geminiKey") || "");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,8 +22,6 @@ export default function AnalyzeForm({ onSubmit, isLoading }: Props) {
       store,
       country,
       language,
-      appstorespy_api_key: appstorespyKey || undefined,
-      gemini_api_key: geminiKey || undefined,
     });
   };
 
@@ -97,39 +93,7 @@ export default function AnalyzeForm({ onSubmit, isLoading }: Props) {
           </div>
         </div>
 
-        <div className="form-spacer" />
 
-        {/* API Keys */}
-        <div className="dropdowns-row">
-          <div className="api-key-group" style={{ flex: 1 }}>
-            <label>AppstoreSpy API Key</label>
-            <input
-              type="password"
-              value={appstorespyKey}
-              onChange={(e) => {
-                setAppstorespyKey(e.target.value);
-                sessionStorage.setItem("appstorespyKey", e.target.value);
-              }}
-              placeholder="Nhập API Key..."
-              disabled={isLoading}
-            />
-            <span className="helper-text"></span>
-          </div>
-          <div className="api-key-group" style={{ flex: 1 }}>
-            <label>Gemini API Key</label>
-            <input
-              type="password"
-              value={geminiKey}
-              onChange={(e) => {
-                setGeminiKey(e.target.value);
-                sessionStorage.setItem("geminiKey", e.target.value);
-              }}
-              placeholder="Nhập API Key..."
-              disabled={isLoading}
-            />
-            <span className="helper-text"></span>
-          </div>
-        </div>
 
         <div className="form-spacer-lg" />
 
@@ -157,7 +121,7 @@ export default function AnalyzeForm({ onSubmit, isLoading }: Props) {
       <div className="form-spacer" />
       <div className="quick-tips">
         <Info />
-        <span>Mẹo: Nhập đúng cấu hình API Keys để bắt đầu phân tích</span>
+        <span>Mẹo: Nhập từ khóa cụ thể để nhận kết quả phân tích chính xác hơn</span>
       </div>
     </form>
   );

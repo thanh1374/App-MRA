@@ -91,8 +91,8 @@ function App() {
           />
         </main>
       ) : (
-        <main className="main-content">
-          <div className="content-container">
+        <main className="main-content main-content-centered">
+          <div className="content-container" style={{ width: '100%', transform: 'translateY(-15vh)' }}>
             {/* Page Header */}
             <div className="page-header-btn">
               <Sparkles />
