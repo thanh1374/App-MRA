@@ -40,8 +40,12 @@ def export_excel(job_id: str) -> Path:
 
     output_dir = Path(settings.output_dir)
     if not output_dir.is_absolute():
-        project_root = Path(__file__).resolve().parent.parent.parent.parent
-        output_dir = project_root / output_dir
+        import os
+        if os.environ.get("VERCEL"):
+            output_dir = Path("/tmp") / settings.output_dir
+        else:
+            project_root = Path(__file__).resolve().parent.parent.parent.parent
+            output_dir = project_root / output_dir
 
     writer = ExcelWriter(
         template_path=template_path,

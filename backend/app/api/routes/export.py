@@ -24,10 +24,12 @@ async def export(request: ExportRequest):
     try:
         output_path = export_excel(request.job_id)
 
+        from starlette.background import BackgroundTask
         return FileResponse(
             path=str(output_path),
             media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
             filename=output_path.name,
+            background=BackgroundTask(output_path.unlink, missing_ok=True)
         )
 
     except ValueError as exc:
